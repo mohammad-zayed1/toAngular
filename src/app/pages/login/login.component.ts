@@ -1,28 +1,23 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {LoginService} from "../../services/login.service";
+
+import {AngularToastifyModule, ToastService} from "angular-toastify";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [],
+  imports: [AngularToastifyModule],
   templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit{
-  isLogin : any ;
-
-  constructor(private router : Router , private loginService :LoginService) {
+  constructor(private router : Router , private _toastService : ToastService  ) {
   }
   ngOnInit() {
-    this.isLogin = localStorage.getItem('isLogin');
-  }
 
+  }
   onUserLogging(e : Event){
     e.preventDefault();
-    localStorage.setItem('isLogin' , 'true');
-    this.loginService.isLogin.subscribe((check)=>{
-      this.isLogin.emit(check);
-    } );
     this.router.navigate(['/home']);
+    this._toastService.success("welcome");
   }
 }

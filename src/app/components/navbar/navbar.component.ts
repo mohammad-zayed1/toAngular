@@ -13,4 +13,10 @@ import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 })
 export class NavbarComponent {
 
+  constructor(private router : Router) {
+  }
+  logout(e :Event){
+    e.preventDefault();
+    this.router.navigate(['/login']);
+  }
 }
